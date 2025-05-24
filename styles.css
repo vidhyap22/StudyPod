@@ -1,6 +1,7 @@
 body {
 	padding: 0;
 	margin: 0;
+	font-family: 'Open Sans', sans-serif;
 	background: #fefdf9;
 	background: linear-gradient(0deg,rgba(255, 203, 203, 1) 29%, rgba(255, 230, 173, 1) 100%);
 }
@@ -158,6 +159,7 @@ a {
 	font-size: 0.85rem;
 	text-transform: uppercase;
 	white-space: normal;
+	margin-bottom: 1rem;
 }
 
 .card-level {
@@ -201,8 +203,6 @@ a {
 	background-color: #FFB5B5;
 	border-color: #FFCBCB;
 	border-radius: 6px;
-	font-family: ;
-
 }
 
 .grow-on-hover {
