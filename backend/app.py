@@ -1,4 +1,5 @@
 from flask import Flask
+from models.user import auth_routes
 
 app = Flask(__name__)
 
