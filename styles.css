@@ -205,6 +205,60 @@ a {
 	border-radius: 6px;
 }
 
+.form-popup-overlay {
+	display: none;
+	position:fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 999;
+	justify-content: center;
+	align-items: center;
+}
+
+.form-popup {
+	position: absolute;
+}
+
+.form-container {
+	width: 35vh;
+	height: 50vh;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 0 10px #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+	display: flex;
+    flex-direction: column;
+	justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.create-pod-field {
+	bottom-margin: 10px;
+}
+
+.form-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 15px; /* add some spacing below the header */
+}
+
+
+.close-form {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	border: none;
+	outline: none;
+	background: none;
+	font-size: 16px;
+}
+
 .grow-on-hover {
 	transition: all 0.5s ease;
 }
@@ -214,30 +268,97 @@ a {
 }
 
 
-/* Login Page */
+/* Login and Sign Up Pages */
 
-.login {
+.login, .signup {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50vh;
+    height: 100vh;
 }
 
 form {
+	width: 35vh;
+	height: 50vh;
     border: 1px solid #ccc;
     padding: 20px;
     box-shadow: 0 0 10px #ccc;
     border-radius: 8px;
     background: #f9f9f9;
+	display: flex;
+    flex-direction: column;
+	justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }
 
-button {
+.pink-btn {
     padding: 8px 10px;
     display: block;
     margin: 0 auto;
+
+	font-size: 14px;
+	color: #675150;
+	padding: 6px 12px;
+	background-color: #FFCBCB;
+	border-color: #FFCBCB;
+	border-radius: 6px;
+}
+
+.pink-btn:hover {
+    padding: 8px 10px;
+    display: block;
+    margin: 0 auto;
+
+	font-size: 14px;
+	color: #675150;
+	padding: 6px 12px;
+	background-color: #FFB5B5;
+	border-color: #FFB5B5;
+	border-radius: 6px;
+}
+
+.small-btn {
+	border: none;
+	background: none;
+	color: #FFB5B5;
+	padding: 0.5px 0.5px;
+	display: block;
+    margin: 10px auto;
+}
+
+.small-btn:hover {
+	border: none;
+	background: none;
+	color: #675150;
+	padding: 1px 1px;
+	display: block;
+    margin: 10px auto;
 }
 
 input {
     line-height: 30px;
     margin-bottom: 10px;
+	width: 25vh;
+	border-radius: 4px;
 }
+
+input.input-users {
+	height: 10vh;
+}
+
+
+
+/* 
+---- LATER ----
+.arrow {
+  position: relative;
+  bottom: -2rem;
+  left: 50%;
+  margin-left:-20px;
+  width: 40px;
+  height: 40px;
+
+  background-image: ;
+  background-size: contain;
+} */

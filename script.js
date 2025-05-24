@@ -151,6 +151,29 @@ const completionPieOptions = {
 var pieChart = new ApexCharts(document.querySelector("#pie-chart"), completionPieOptions);
 pieChart.render();
 
+
+function openForm() {
+	document.getElementById("formOverlay").style.display = "flex";
+}
+
+function closeForm() {
+	document.getElementById("formOverlay").style.display = "none";
+}
+
+
+document.getElementById("add-pod-form").addEventListener("submit", function(e) {
+	e.preventDefault();
+	const gusName = document.getElementById("gusname").value;
+	const podName = document.getElementById("podname").value;
+	const users = document.getElementById("users").value.split(",").map(u => u.trim());
+
+
+	addPodCard(gusName, podName);
+
+	this.reset();
+	closeForm();
+});
+
 function addPodCard(gusName, podName, level = 0) {
 	gusName = gusName || "My Gus";
 	podName = podName || "My Study Pod";
@@ -170,10 +193,4 @@ function addPodCard(gusName, podName, level = 0) {
 
 	cardsGrid.appendChild(newCard);
 };
-
-document.getElementById("add-gus-button").addEventListener("click",function() {
-	const gusName = prompt("Name your Gus!");
-	const podName = prompt("Enter Pod Name");
-	addPodCard(gusName, podName);
-});
 
