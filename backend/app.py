@@ -1,9 +1,11 @@
 from flask import Flask
 from models.user import auth_routes
+from models.project import project_routes
 
 app = Flask(__name__)
 
 app.register_blueprint(auth_routes, url_prefix="/auth")
+app.register_blueprint(project_routes, url_prefix="/project")
 
 @app.route('/')
 def home():

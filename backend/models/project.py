@@ -1,5 +1,8 @@
 import sqlite3
+from flask import Flask, request, jsonify, Blueprint, make_response
+from user import token_required 
 
+project_routes = Blueprint("project_routes", __name__)
 
 def create_project_table():
     """This is creating the whole table where all the projects will go."""
@@ -20,5 +23,10 @@ def create_project_table():
 
     conn.commit()
     conn.close()
+
+
+# @project_routes.route('/create-a-project', methods=['POST'])
+# def login(current_user, project_id):
+
 
 create_project_table()
