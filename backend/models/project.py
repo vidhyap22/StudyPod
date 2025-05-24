@@ -80,6 +80,37 @@ def create_project_table():
 
 
 
+@project_routes.route('/create-project', methods=['POST'])
+@token_required
+def create_project(current_user):
+
+    data = request.json
+    user_ids = data["user_ids"]
+
+    try:
+        conn = sqlite3.connect("gus.db")
+        cur = conn.cursor()
+
+        cur.execute("""INSERT INTO Project (project_title, gus_name, level, deadline, is_active, created_time) 
+                    VALUES (?, ?, ?, ?, ?, ?)""", 
+                    (data["project_title"], data["gus_name"], data["level"], data["deadline"], data["is_active"], datetime.now()))
+        project_id = cur.lastrowid
+
+        user_project_pairs = [(uid, project_id) for uid in user_ids]
+        
+        cur.executemany("INSERT INTO User_Project (user_id, project_id) VALUES (?, ?)", user_project_pairs)
+        conn.commit()
+
+        return jsonify(msg="Created project!"), 201
+    except sqlite3.IntegrityError as e:
+        return jsonify(msg=f"Error creating project: {str(e)}"), 500
+    finally:
+        conn.close()
+
+create_project_table()
+
+
+
 # create_project_table()
 # conn = sqlite3.connect("gus.db")
 # cur = conn.cursor()
