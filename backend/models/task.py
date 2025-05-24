@@ -48,3 +48,23 @@ def create_task(current_user):
         conn.close()
 
 
+@task_routes.route('/mark-task-completed', methods=['PUT'])
+@token_required
+def mark_task_completed(current_user):
+
+    data = request.json
+
+    try:
+        conn = sqlite3.connect("gus.db")
+        cur = conn.cursor()
+
+        cur.execute(f"""UPDATE Task
+                        SET is_completed = True
+                        WHERE task_id = {data["task_id"]};""")
+        conn.commit()
+
+        return jsonify(msg="Created task!"), 201
+    except sqlite3.IntegrityError as e:
+        return jsonify(msg=f"Error creating task: {str(e)}"), 500
+    finally:
+        conn.close()
