@@ -152,8 +152,8 @@ var pieChart = new ApexCharts(document.querySelector("#pie-chart"), completionPi
 pieChart.render();
 
 function addPodCard(gusName, podName, level = 0) {
-	gusName = gusName || "Your Gus";
-	podName = podName || "Your Project Pod";
+	gusName = gusName || "My Gus";
+	podName = podName || "My Study Pod";
 
 	const cardsGrid = document.querySelector(".cards-grid");
 	const newCard = document.createElement("div");
