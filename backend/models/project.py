@@ -35,7 +35,7 @@ def get_all_projects(current_user):
 
 @project_routes.route('/get-project', methods=['GET'])
 @token_required
-def get_project(current_user):
+def get_project(current_user): # current user is the entire tuple
     """This returns one project given the project id. Does not use user id."""
     # print("current user: ", current_user)
     project_id = request.args.get("project_id")
@@ -84,6 +84,26 @@ def get_project_owners(current_user):
 
     return jsonify(owners), 200
 
+@project_routes.route('/update-gus-level', methods=['PUT'])
+@token_required
+def update_gus_level(current_user):
+
+    data = request.json
+
+    try:
+        conn = sqlite3.connect("gus.db")
+        cur = conn.cursor()
+
+        cur.execute(f"""UPDATE Project
+                        SET level = {data["level"]}
+                        WHERE project_id = {data["project_id"]};""")
+        conn.commit()
+
+        return jsonify(msg="Updated Gus Level!"), 201
+    except sqlite3.IntegrityError as e:
+        return jsonify(msg=f"Error updating level: {str(e)}"), 500
+    finally:
+        conn.close()
 # ---------------------------------------------------------------------------
 
 def create_project_table():
@@ -105,6 +125,8 @@ def create_project_table():
 
     conn.commit()
     conn.close()
+
+    project_id = cur.lastrowid
 
 # create_project_table()
 # conn = sqlite3.connect("gus.db")

@@ -61,9 +61,9 @@ def mark_task_completed(current_user):
                         WHERE task_id = {data["task_id"]};""")
         conn.commit()
 
-        return jsonify(msg="Created task!"), 201
+        return jsonify(msg="Mark task completed!"), 201
     except sqlite3.IntegrityError as e:
-        return jsonify(msg=f"Error creating task: {str(e)}"), 500
+        return jsonify(msg=f"Error completing task: {str(e)}"), 500
     finally:
         conn.close()
 
