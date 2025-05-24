@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>StudyPod</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<div class="wrapper-grid">
+			<!-- HEADER -->
+			<header class="header">
+				<div class="header-left">
+					<div class="header-title">DASHBOARD</div>
+				</div>
+			</header>
+
+			<!-- SIDEBAR -->
+			<div class="sidebar">
+				<div class="sidebar-title">
+					<div class="logo-img"></div>
+					STUDYPOD
+				</div>
+				<ul class="sidebar-items-list">
+					<li class="sidebar-item">
+						<a href="">My Dashboard</a>
+					</li>
+					<li class="sidebar-item">
+						<a href="#">About</a>
+					</li>
+					<li class="sidebar-item">
+						<a href="#">Contact Us</a>
+					</li>
+					<li class="sidebar-item">
+						<a href="#">Settings</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="main-card cards-content">
+					<div class="main-card-title cards-content-title">My Active Gus</div>
+					<div class="cards-grid">
+						<div class="card-wrapper grow-on-hover">
+							<h1 class="card-level">13</h1>
+							<div class="card-inner">
+								<div class="gus-img"></div>
+								<h3 class="card-title">Yaoi Podcast Gus</h3>
+							</div>
+						</div>
+
+						<div class="card-wrapper grow-on-hover">
+							<h1 class="card-level">8</h1>
+							<div class="card-inner">
+								<div class="gus-img"></div>
+								<h3 class="card-title">Agathario Gus</h3>
+							</div>
+						</div>
+
+						<div class="card-wrapper grow-on-hover">
+							<h1 class="card-level">10</h1>
+							<div class="card-inner">
+								<div class="gus-img"></div>
+								<h3 class="card-title">Glee Gus</h3>
+							</div>
+						</div>
+						<div class="card-wrapper grow-on-hover">
+							<h1 class="card-level">13</h1>
+							<div class="card-inner">
+								<div class="gus-img"></div>
+								<h3 class="card-title">Yaoi Podcast Gus</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="charts-content">
+					<div class="main-card charts-card grow-on-hover">
+						<h2 class="main-card-title chart-title">Levels of Gus</h2>
+						<div id="bar-chart"></div>
+					</div>
+
+					<div class="main-card charts-card grow-on-hover">
+						<h2 class="main-card-title chart-title">Task Completion</h2>
+						<div id="pie-chart"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- ApexCharts -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
+		<script src="script.js"></script>
+	</body>
+</html>
