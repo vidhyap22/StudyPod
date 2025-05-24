@@ -2,8 +2,11 @@ import sqlite3
 import bcrypt
 import datetime
 from flask import Flask, request, jsonify, Blueprint, make_response
-from flask_jwt_extended import JWTManager, create_access_token, jwt
+from flask_jwt_extended import JWTManager, create_access_token
+import jwt
+
 from dotenv import load_dotenv
+from functools import wraps
 import os
 
 load_dotenv()
@@ -18,6 +21,28 @@ def hash_password(plain_password):
 def check_password(plain_password, hashed):
     return bcrypt.checkpw(plain_password.encode('utf-8'), hashed.encode('utf-8'))
 
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = request.cookies.get('jwt_token')
+
+        if not token:
+            return jsonify({'message': 'Missing Token'}), 401
+
+        try:
+            
+            data = jwt.decode(token, os.getenv("SECRET_KEY"), algorithms=["HS256"])
+
+            conn = sqlite3.connect("gus.db")
+            cur = conn.cursor()
+            cur.execute(f"SELECT * FROM User WHERE user_id = '{data['user_id']}'")
+            user = cur.fetchone()
+        except:
+            return jsonify({'message': 'Invalid Token'}), 401
+
+        return f(user, *args, **kwargs)
+
+    return decorated
 
 def authenticate_user(un, pwd):
     conn = sqlite3.connect("gus.db")
