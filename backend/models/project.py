@@ -36,6 +36,7 @@ def get_all_projects(current_user):
 @project_routes.route('/get-project', methods=['GET'])
 @token_required
 def get_project(current_user): # current user is the entire tuple
+def get_project(current_user):
     """This returns one project given the project id. Does not use user id."""
     # print("current user: ", current_user)
     project_id = request.args.get("project_id")
@@ -58,6 +59,34 @@ def get_project(current_user): # current user is the entire tuple
     else:
         return jsonify({"message": "Project not found or access denied"}), 404
 
+
+@project_routes.route('/get-project-owners', methods=['GET'])
+@token_required
+def get_project_owners(current_user):
+    """This returns all the owners of the project given the project id."""
+    project_id = request.args.get('project_id')
+
+    if not project_id:
+        return jsonify({'error': 'Missing project_id'}), 400
+
+    conn = sqlite3.connect("gus.db")
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+
+    cur.execute("""
+        SELECT u.user_id, u.username
+        FROM User u
+        JOIN User_Project up ON u.user_id = up.user_id
+        WHERE up.project_id = ?
+    """, (project_id,))
+
+    owners = [dict(row) for row in cur.fetchall()]
+    conn.close()
+
+    return jsonify(owners), 200
+
+# ---------------------------------------------------------------------------
+
 def create_project_table():
     """This is creating the whole table where all the projects will go."""
     conn = sqlite3.connect("gus.db")
@@ -78,45 +107,14 @@ def create_project_table():
     conn.commit()
     conn.close()
 
-
-
-@project_routes.route('/create-project', methods=['POST'])
-@token_required
-def create_project(current_user):
-
-    data = request.json
-    user_ids = data["user_ids"]
-
-    try:
-        conn = sqlite3.connect("gus.db")
-        cur = conn.cursor()
-
-        cur.execute("""INSERT INTO Project (project_title, gus_name, level, deadline, is_active, created_time) 
-                    VALUES (?, ?, ?, ?, ?, ?)""", 
-                    (data["project_title"], data["gus_name"], data["level"], data["deadline"], data["is_active"], datetime.now()))
         project_id = cur.lastrowid
-
-        user_project_pairs = [(uid, project_id) for uid in user_ids]
-        
-        cur.executemany("INSERT INTO User_Project (user_id, project_id) VALUES (?, ?)", user_project_pairs)
-        conn.commit()
-
-        return jsonify(msg="Created project!"), 201
-    except sqlite3.IntegrityError as e:
-        return jsonify(msg=f"Error creating project: {str(e)}"), 500
-    finally:
-        conn.close()
-
-create_project_table()
-
-
 
 # create_project_table()
 # conn = sqlite3.connect("gus.db")
 # cur = conn.cursor()
 
-# cur.execute("""INSERT INTO Project (gus_name, project_title, level, deadline, is_active) VALUES ('dead', 'old project', 50, '2025-06-01', 0);""")
-# cur.execute("""INSERT INTO User_Project (user_id, project_id) VALUES (1, 3);""")
+# # cur.execute("""INSERT INTO Project (gus_name, project_title, level, deadline, is_active) VALUES ('dead', 'old project', 50, '2025-06-01', 0);""")
+# cur.execute("""INSERT INTO User_Project (user_id, project_id) VALUES (3, 3);""")
 
 # conn.commit()
 # conn.close()

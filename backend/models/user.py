@@ -71,6 +71,7 @@ def authenticate_user(un, plain_pwd):
 
 @auth_routes.route('/register', methods=['POST'])
 def register():
+    print("debug reached register")
     data = request.json
     username = data["username"]
     password = hash_password(data["password"])
