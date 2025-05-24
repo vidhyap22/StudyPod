@@ -175,6 +175,24 @@ a {
 	padding-left: 15px;
 }
 
+<<<<<<< Updated upstream
+=======
+.main-card-title-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+#add-gus-button {
+	font-size: 14px;
+	padding: 6px 12px;
+	background-color: #FFB5B5;
+	border-color: #FFCBCB;
+	border-radius: 6px;
+}
+
+>>>>>>> Stashed changes
 .grow-on-hover {
 	transition: all 0.5s ease;
 }
