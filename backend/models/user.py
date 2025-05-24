@@ -1,6 +1,6 @@
 import sqlite3
 import bcrypt
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from flask import Flask, request, jsonify, Blueprint, make_response
 from flask_jwt_extended import JWTManager, create_access_token
 import jwt
@@ -25,19 +25,20 @@ def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         token = request.cookies.get('jwt_token')
-
+        print("in token_required: ", token)
         if not token:
             return jsonify({'message': 'Missing Token'}), 401
 
         try:
-            
+            print("secret_key: ", os.getenv("SECRET_KEY"))
             data = jwt.decode(token, os.getenv("SECRET_KEY"), algorithms=["HS256"])
 
             conn = sqlite3.connect("gus.db")
             cur = conn.cursor()
             cur.execute(f"SELECT * FROM User WHERE user_id = '{data['user_id']}'")
             user = cur.fetchone()
-        except:
+        except Exception as e:
+            print("e: ", e)
             return jsonify({'message': 'Invalid Token'}), 401
 
         return f(user, *args, **kwargs)
@@ -58,7 +59,7 @@ def authenticate_user(un, plain_pwd):
     if not user or not check_password(plain_pwd, user[2]):
         return jsonify({'message': 'Invalid username or password'}), 401
     
-    token = jwt.encode({'user_id': user[0], 'exp': datetime.now()}, os.getenv("SECRET_KEY"), algorithm="HS256")
+    token = jwt.encode({'user_id': user[0], 'exp': datetime.now(timezone.utc) + timedelta(hours=1)}, os.getenv("SECRET_KEY"), algorithm="HS256")
 
     # response = make_response(redirect(url_for('dashboard')))
     response = make_response(jsonify({"message": "Login succesful!"}))
