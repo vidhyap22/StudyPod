@@ -1,6 +1,7 @@
 body {
 	padding: 0;
 	margin: 0;
+	font-family: 'Open Sans', sans-serif;
 	background: #fefdf9;
 	background: linear-gradient(0deg,rgba(255, 203, 203, 1) 29%, rgba(255, 230, 173, 1) 100%);
 }
@@ -108,9 +109,14 @@ a {
 	justify-content: space-around;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	background-color: #f4e8ff95;
+	max-width: 250px;
+	word-wrap: break-word;
+  	overflow-wrap: break-word;
+	overflow: hidden;
+	white-space: normal;
 }
 
-.cards-grid .card-wrapper:nth-child(5n) {
+/* .cards-grid .card-wrapper:nth-child(5n) {
 	background-color: #fff4de95;
 }
 
@@ -124,7 +130,7 @@ a {
 
 .cards-grid .card-wrapper:nth-child(5n + 4) {
 	background-color: #bce6fb4a;
-}
+} */
 
 .card-inner {
 	justify-content: space-between;
@@ -141,10 +147,19 @@ a {
 	border-radius: 5%;
 }
 
-.card-title {
+.gus-name {
+	font-weight:800;
+	font-size: 1rem;
+	text-transform: uppercase;
+	margin-bottom: 1rem;
+}
+
+.pod-name {
 	font-weight: 600;
 	font-size: 0.85rem;
 	text-transform: uppercase;
+	white-space: normal;
+	margin-bottom: 1rem;
 }
 
 .card-level {
@@ -175,8 +190,6 @@ a {
 	padding-left: 15px;
 }
 
-<<<<<<< Updated upstream
-=======
 .main-card-title-row {
 	display: flex;
 	justify-content: space-between;
@@ -192,7 +205,6 @@ a {
 	border-radius: 6px;
 }
 
->>>>>>> Stashed changes
 .grow-on-hover {
 	transition: all 0.5s ease;
 }

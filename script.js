@@ -150,3 +150,30 @@ const completionPieOptions = {
 
 var pieChart = new ApexCharts(document.querySelector("#pie-chart"), completionPieOptions);
 pieChart.render();
+
+function addPodCard(gusName, podName, level = 0) {
+	gusName = gusName || "My Gus";
+	podName = podName || "My Study Pod";
+
+	const cardsGrid = document.querySelector(".cards-grid");
+	const newCard = document.createElement("div");
+	newCard.classList.add("card-wrapper", "grow-on-hover");
+	
+	newCard.innerHTML = `
+		<h1 class="card-level">${level}</h1>
+		<div class="card-inner">
+			<div class="gus-img"></div>
+			<h3 class="gus-name">${gusName}</h3>
+			<h3 class="pod-name">${podName}</h3>
+		</div>
+	`;
+
+	cardsGrid.appendChild(newCard);
+};
+
+document.getElementById("add-gus-button").addEventListener("click",function() {
+	const gusName = prompt("Name your Gus!");
+	const podName = prompt("Enter Pod Name");
+	addPodCard(gusName, podName);
+});
+
