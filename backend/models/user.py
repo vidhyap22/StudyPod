@@ -1,6 +1,6 @@
 import sqlite3
 import bcrypt
-import datetime
+from datetime import datetime
 from flask import Flask, request, jsonify, Blueprint, make_response
 from flask_jwt_extended import JWTManager, create_access_token
 import jwt
@@ -44,16 +44,21 @@ def token_required(f):
 
     return decorated
 
-def authenticate_user(un, pwd):
+def authenticate_user(un, plain_pwd):
     conn = sqlite3.connect("gus.db")
     cur = conn.cursor()
     cur.execute(f"SELECT * FROM User WHERE username = '{un}'")
     user = cur.fetchone()
 
-    if not user or not check_password(pwd, user["password"]):
+    print(user)
+    print("inputting password: ", plain_pwd)
+    # print("hashed password: ", hash_password(plain_pwd))
+    print("fetched password: ", user[2])
+
+    if not user or not check_password(plain_pwd, user[2]):
         return jsonify({'message': 'Invalid username or password'}), 401
     
-    token = jwt.encode({'user_id': user.user_id, 'exp': datetime.now()}, os.getenv("SECRET_KEY"), algorithm="HS256")
+    token = jwt.encode({'user_id': user[0], 'exp': datetime.now()}, os.getenv("SECRET_KEY"), algorithm="HS256")
 
     # response = make_response(redirect(url_for('dashboard')))
     response = make_response(jsonify({"message": "Login succesful!"}))
@@ -85,10 +90,10 @@ def register():
 def login():
     data = request.json
     username = data["username"]
-    password = hash_password(data["password"])
+    password = data["password"]
 
     response = authenticate_user(username, password)
-
+    return response
 
 
 def init_db():
