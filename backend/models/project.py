@@ -35,7 +35,6 @@ def get_all_projects(current_user):
 
 @project_routes.route('/get-project', methods=['GET'])
 @token_required
-def get_project(current_user): # current user is the entire tuple
 def get_project(current_user):
     """This returns one project given the project id. Does not use user id."""
     # print("current user: ", current_user)
@@ -106,8 +105,6 @@ def create_project_table():
 
     conn.commit()
     conn.close()
-
-        project_id = cur.lastrowid
 
 # create_project_table()
 # conn = sqlite3.connect("gus.db")
