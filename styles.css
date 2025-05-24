@@ -212,3 +212,32 @@ a {
 .grow-on-hover:hover {
 	transform: scale(1.015);
 }
+
+
+/* Login Page */
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+form {
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 0 10px #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+button {
+    padding: 8px 10px;
+    display: block;
+    margin: 0 auto;
+}
+
+input {
+    line-height: 30px;
+    margin-bottom: 10px;
+}
