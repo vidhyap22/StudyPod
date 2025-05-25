@@ -120,3 +120,27 @@ def get_tasks_from_project_id(current_user):
     conn.close()
 
     return jsonify(tasks), 200
+
+@task_routes.route('/get_total_tasks_completed', methods=['GET'])
+@token_required
+def get_total_tasks_completed(current_user):
+    """Returns all tasks completed by all users associated with a specific project."""
+    """This would run for each user that's working on the project."""
+    project_id = request.args.get('project_id')
+
+    if not project_id:
+        return jsonify({'error': 'Missing project_id'}), 400
+
+    conn = sqlite3.connect("gus.db")
+    cur = conn.cursor()
+
+    cur.execute("""
+        SELECT COUNT(*)
+        FROM Task
+        WHERE project_id = ? AND is_completed = 1
+    """, (project_id,))
+
+    count = cur.fetchone()[0]
+    conn.close()
+
+    return jsonify({"count": count}), 200
