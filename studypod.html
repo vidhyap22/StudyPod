@@ -10,8 +10,90 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
 
+    <style>
+        .completed span{
+            text-decoration: line-through;
+            color: pink;
+        }
+    </style>
+
 </head>
 <body>
-    
+		<div class="wrapper-grid">
+			<!-- HEADER -->
+			<header class="header">
+				<div class="header-left">
+					<div class="header-title">[INSERT PROJECT NAME]</div>
+				</div>
+			</header>
+
+			<!-- SIDEBAR -->
+			<div class="sidebar">
+				<div class="sidebar-title">
+					<div class="logo-img"></div>
+				</div>
+				<ul class="sidebar-items-list">
+					<li class="sidebar-item">
+						<a href="">My Dashboard</a>
+					</li>
+					<li class="sidebar-item">
+						<a href="#">About</a>
+					</li>
+					<li class="sidebar-item">
+						<a href="#">Contact Us</a>
+					</li>
+					<li class="sidebar-item">
+						<a href="#">Settings</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="main-content">
+
+                <div class="todo-character-wrapper">
+                    <!-- To-Do List Section -->
+                    <div class="charts-card">
+                        <div class="main-card-title-row">
+                        <div class="main-card-title"><h2>Task List</h2></div>
+                        </div>
+                        <div id="todo-form">
+                        <input
+                            type="text"
+                            class="input-item"
+                            name="input_box"
+                            id="input-box"
+                            placeholder="Add Task"
+                        />
+                        <button id="add-task-button" onclick="addTask()">Add</button>
+                        </div>
+                        <ul id="list-container"></ul>
+                        </div>
+
+                    <!-- To-Do List Section -->
+                    <div class="gus-entity-card">
+                        <div class="main-card-title"><h2>[INSERT TASK NAME]</h2></div>
+
+                        <div class="character-box vertical">
+                            <img src="https://i.imgur.com/jnecOuS.png" alt="Character" class="character-img" />
+                            <div class="character-info">
+                            <h3 class="character-name">[INSERT GUS NAME]</h3>
+                            <h3 class="character-name"></h3>
+                            <h3 class="character-name">[INSERT GUS LEVEL]</h3>
+
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 50%;"></div>
+                            </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div> 	<!-- END OF TODO CHARACTER WRAPPER -->
+
+
+			</div>
+
+		</div>
+    <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
