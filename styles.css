@@ -195,6 +195,7 @@ a {
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 1rem;
+	width: 100%;
 }
 
 #add-gus-button {
