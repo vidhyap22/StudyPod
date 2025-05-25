@@ -391,9 +391,10 @@ li {
 .character-img {
 	width: 350px;
 	height: 350px;
-	border-radius: 75%;
+	border-radius: 15%;
 	margin-right: 15px;
-	object-fit: cover;
+    overflow:hidden;
+	border: 10px solid #7db6d9;
 }
 
 .character-box.vertical {
