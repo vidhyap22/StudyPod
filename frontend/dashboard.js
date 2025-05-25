@@ -65,7 +65,6 @@ async function loadCompletedTaskCounts() {
 	const cards = document.querySelectorAll(".card-wrapper");
 	for (const card of cards) {
 		const projectId = card.dataset.projectId;
-		console.log(JSON.stringify(card.dataset));
 		const countEl = card.querySelector(".tasks-completed");
 		try {
 			const res = await fetch(`http://127.0.0.1:5000/task/get_total_tasks_completed?project_id=${projectId}`, {

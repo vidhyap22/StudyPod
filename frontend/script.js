@@ -112,7 +112,7 @@ const completionPieOptions = {
 		height: 300,
 	},
 	labels: ["Complete", "Remaining"],
-	colors: ["#5e60ef", "#e0e0e0"],
+	colors: ["#ffb5b5", "#ffe5e7"],
 	dataLabels: {
 		enabled: false,
 		style: {
