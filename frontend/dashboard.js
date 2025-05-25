@@ -53,6 +53,7 @@ async function loadProjects() {
 		newCard.addEventListener('click', () => {
 			window.location.href = `http://127.0.0.1:5500/frontend/studypod.html?project_id=${project.project_id}`;
 		});
+		newCard.dataset.projectId = project.project_id;
 
 		cardsGrid.appendChild(newCard);
 	});
@@ -64,6 +65,7 @@ async function loadCompletedTaskCounts() {
 	const cards = document.querySelectorAll(".card-wrapper");
 	for (const card of cards) {
 		const projectId = card.dataset.projectId;
+		console.log(JSON.stringify(card.dataset));
 		const countEl = card.querySelector(".tasks-completed");
 		try {
 			const res = await fetch(`http://127.0.0.1:5000/task/get_total_tasks_completed?project_id=${projectId}`, {
@@ -71,6 +73,9 @@ async function loadCompletedTaskCounts() {
 			});
 			const data = await res.json();
 			const {completed, total} = data;
+
+			console.log(completed, total)
+
 			countEl.textContent = `${completed}/${total} tasks completed`;
 		} catch (e) {
 			console.error("Error loading tasks for project:", projectId, e);

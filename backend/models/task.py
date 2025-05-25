@@ -120,6 +120,7 @@ def get_total_tasks_completed(current_user):
    """Returns all tasks completed by all users associated with a specific project."""
    """This would run for each user that's working on the project."""
    project_id = request.args.get('project_id')
+   print(project_id)
 
    if not project_id:
        return jsonify({'error': 'Missing project_id'}), 400

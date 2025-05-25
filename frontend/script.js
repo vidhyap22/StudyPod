@@ -277,6 +277,7 @@ function addPodCard(gusName, podName, deadline, level = 0, projectId = null) {
 		}
 	});
 
+	newCard.dataset.projectId = projectId;
 	cardsGrid.appendChild(newCard);
 
 	loadCompletedTaskCounts();
