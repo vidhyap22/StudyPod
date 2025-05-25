@@ -192,7 +192,7 @@ function addPodCard(gusName, podName, deadline, level = 0) {
 	}) : "None";
 
 	newCard.innerHTML = `
-		<h1 class="card-level">${level}</h1>
+		<h1 class="card-level">Level: ${level}</h1>
 		<div class="card-inner">
 			<img class="base-gus" src="images/base-gus.png" alt="Base Gus">
 			<h3 class="gus-name">${gusName}</h3>
@@ -200,6 +200,10 @@ function addPodCard(gusName, podName, deadline, level = 0) {
 			<h3 class="deadline">Due: ${formattedDate}</h3>
 		</div>
 	`;
+
+	newCard.addEventListener('click', () => {
+		window.location.href = "http://127.0.0.1:5500/frontend/studypod.html";
+	});
 
 	cardsGrid.appendChild(newCard);
 }

@@ -33,7 +33,7 @@ async function loadProjects() {
 		}) : "None";
 
 		newCard.innerHTML = `
-			<h1 class="card-level">${project.level}</h1>
+			<h1 class="card-level">Level: ${project.level}</h1>
 			<div class="card-inner">
 				<img class="base-gus" src="images/base-gus.png" alt="Base Gus">
 				<h3 class="gus-name">${project.gus_name}</h3>
@@ -41,6 +41,11 @@ async function loadProjects() {
 				<h3 class="deadline">Due: ${formattedDate}</h3>
 			</div>
 		`;
+
+		newCard.addEventListener('click', () => {
+			window.location.href = "http://127.0.0.1:5500/frontend/studypod.html";
+		});
+
 		cardsGrid.appendChild(newCard);
 	});
 }

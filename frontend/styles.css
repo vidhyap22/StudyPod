@@ -99,11 +99,16 @@ a {
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	gap: 25px;
 	margin: 25px 0; */
-	display: grid;
+	/* display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 	gap: 25px;
 	margin: 25px 0 10px 0;
-	width: 100%;
+	width: 100%; */
+
+	display: flex;
+	flex-wrap: wrap;      /* so cards go to next line when needed */
+	gap: 25px;            /* space between cards */
+	justify-content: flex-start;
 }
 
 .card-wrapper {
