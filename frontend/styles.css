@@ -424,7 +424,7 @@ li {
 	transition: width 0.3s ease;
 }
 
-.character-name {
+.character-name, .gus-level {
 	color: #dd7e91;
 }
 .pink-btn:hover {
