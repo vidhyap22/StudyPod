@@ -54,12 +54,17 @@ a {
 }
 .logo-img {
 	height: 200px;
+	max-height: 20vh;
+	max-width: 80%;
 	aspect-ratio: 1;
 	background-image: url("images/studypod-logo.png");
 	border-radius: 10%;
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
+
+	margin: 0 auto;
+	display: block;
 }
 .sidebar-items-list {
 	list-style-type: none;
@@ -78,7 +83,7 @@ a {
 
 .sidebar-item:hover {
 	cursor: pointer;
-	background-color: #fefdf9;
+	background-color: #fff1da;
 }
 
 .main-content {
@@ -91,7 +96,7 @@ a {
 .cards-content {
 	background-color: #fefdf9;
 	padding: 30px;
-	border-radius: 2px;
+	border-radius: 10px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .cards-grid {
@@ -206,7 +211,7 @@ a {
 .charts-card {
 	background-color: #fefdf9;
 	padding: 30px;
-	border-radius: 2px;
+	border-radius: 10px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -384,7 +389,7 @@ li {
 .gus-entity-card {
 	background-color: #fefdf9;
 	padding: 30px;
-	border-radius: 2px;
+	border-radius: 10px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
