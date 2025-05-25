@@ -151,6 +151,29 @@ const completionPieOptions = {
 var pieChart = new ApexCharts(document.querySelector("#pie-chart"), completionPieOptions);
 pieChart.render();
 
+
+function openForm() {
+	document.getElementById("formOverlay").style.display = "flex";
+}
+
+function closeForm() {
+	document.getElementById("formOverlay").style.display = "none";
+}
+
+
+document.getElementById("add-pod-form").addEventListener("submit", function(e) {
+	e.preventDefault();
+	const gusName = document.getElementById("gusname").value;
+	const podName = document.getElementById("podname").value;
+	const users = document.getElementById("users").value.split(",").map(u => u.trim());
+
+
+	addPodCard(gusName, podName);
+
+	this.reset();
+	closeForm();
+});
+
 function addPodCard(gusName, podName, level = 0) {
 	gusName = gusName || "My Gus";
 	podName = podName || "My Study Pod";
@@ -162,7 +185,7 @@ function addPodCard(gusName, podName, level = 0) {
 	newCard.innerHTML = `
 		<h1 class="card-level">${level}</h1>
 		<div class="card-inner">
-			<div class="gus-img"></div>
+			<img class="base-gus" src="https://i.imgur.com/z6kgobh.png" alt="Base Gus">
 			<h3 class="gus-name">${gusName}</h3>
 			<h3 class="pod-name">${podName}</h3>
 		</div>
@@ -170,7 +193,6 @@ function addPodCard(gusName, podName, level = 0) {
 
 	cardsGrid.appendChild(newCard);
 };
-
 document.getElementById("add-gus-button").addEventListener("click",function() {
 	const gusName = prompt("Name your Gus!");
 	const podName = prompt("Enter Pod Name");
@@ -178,36 +200,3 @@ document.getElementById("add-gus-button").addEventListener("click",function() {
 });
 
 
-function addTask(){
-	const inputBox = document.getElementById("input-box");
-	const listContainer = document.getElementById("list-container");
-
-	const task = inputBox.value.trim();
-	if(!task){
-		alert('Please write down a Task');
-		return;
-	}
-
-	const li = document.createElement("li");
-	li.innerHTML = `
-		<label>
-		<input type="checkbox">
-		<span>${task}</span>
-		</label>
-		`;
-
-	listContainer.appendChild(li);
-
-	inputBox.value = " ";
-
-	const checkbox = li.querySelector("input");
-
-	checkbox.addEventListener("click", function () {
-    li.classList.toggle("completed", checkbox.checked);
-    updateCounters();
-  	
-	});
-
-
-
-}
