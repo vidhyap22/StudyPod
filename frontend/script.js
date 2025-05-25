@@ -151,7 +151,6 @@ const completionPieOptions = {
 var pieChart = new ApexCharts(document.querySelector("#pie-chart"), completionPieOptions);
 pieChart.render();
 
-
 function openForm() {
 	document.getElementById("formOverlay").style.display = "flex";
 }
@@ -160,14 +159,18 @@ function closeForm() {
 	document.getElementById("formOverlay").style.display = "none";
 }
 
-
-document.getElementById("add-pod-form").addEventListener("submit", function(e) {
+document.getElementById("add-pod-form").addEventListener("submit", function (e) {
 	e.preventDefault();
 	const gusName = document.getElementById("gusname").value;
 	const podName = document.getElementById("podname").value;
+
 	const deadline = document.getElementById("deadline").value;
 	const users = document.getElementById("users").value.split(",").map(u => u.trim());
 
+	const users = document
+		.getElementById("users")
+		.value.split(",")
+		.map((u) => u.trim());
 
 	addPodCard(gusName, podName, deadline);
 
@@ -182,11 +185,11 @@ function addPodCard(gusName, podName, deadline, level = 0) {
 	const cardsGrid = document.querySelector(".cards-grid");
 	const newCard = document.createElement("div");
 	newCard.classList.add("card-wrapper", "grow-on-hover");
-	
+
 	newCard.innerHTML = `
 		<h1 class="card-level">${level}</h1>
 		<div class="card-inner">
-			<img class="base-gus" src="https://i.imgur.com/z6kgobh.png" alt="Base Gus">
+			<img class="base-gus" src="images/base-gus.png" alt="Base Gus">
 			<h3 class="gus-name">${gusName}</h3>
 			<h3 class="pod-name">${podName}</h3>
 			<h3 class="deadline">${deadline}</h3>
@@ -194,15 +197,15 @@ function addPodCard(gusName, podName, deadline, level = 0) {
 	`;
 
 	cardsGrid.appendChild(newCard);
-};
+}
 
-function addTask(){
+function addTask() {
 	const inputBox = document.getElementById("input-box");
 	const listContainer = document.getElementById("list-container");
 
 	const task = inputBox.value.trim();
-	if(!task){
-		alert('Please write down a Task');
+	if (!task) {
+		alert("Please write down a Task");
 		return;
 	}
 
@@ -221,9 +224,7 @@ function addTask(){
 	const checkbox = li.querySelector("input");
 
 	checkbox.addEventListener("click", function () {
-    li.classList.toggle("completed", checkbox.checked);
-    updateCounters();
-  	
+		li.classList.toggle("completed", checkbox.checked);
+		updateCounters();
 	});
 }
-
