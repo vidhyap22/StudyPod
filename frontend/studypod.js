@@ -1,4 +1,63 @@
-window.addEventListener("DOMContentLoaded", loadTasks);
+let gus_level = 0;
+let projectId = 0;
+window.addEventListener("DOMContentLoaded", loadWindow());
+
+function loadWindow() {
+	loadProjectDetails();
+	loadTasks();
+}
+async function loadProjectDetails() {
+	const urlParams = new URLSearchParams(window.location.search);
+	projectId = urlParams.get("project_id");
+
+	let level_gus_image = {};
+
+	level_gus_image[0] = "images/gus-rug.png"
+	level_gus_image[1] = "images/gus_level_1.PNG"
+	level_gus_image[2] = "images/gus_level_2.PNG"
+	level_gus_image[3] = "images/gus_level_3.PNG"
+	level_gus_image[4] = "images/gus_level_4.PNG"
+	level_gus_image[5] = "images/gus_level_5.PNG"
+
+	if (!projectId) {
+		console.error("No project_id in URL");
+		return;
+	}
+
+	try {
+		const response = await fetch(`http://127.0.0.1:5000/project/get-project?project_id=${projectId}`, {
+			method: "GET",
+			credentials: "include"
+		});
+
+		if (!response.ok) {
+			throw new Error("Failed to fetch project");
+		}
+
+		const project = await response.json();
+
+		// Populate elements by ID
+        const rawDate = project.deadline;
+        const formattedDate = rawDate ? new Date(rawDate).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        }) : "None";
+        document.getElementById("due-date").textContent = document.getElementById("due-date").textContent = "Due Date: " + formattedDate;
+		document.getElementById("project-title").textContent = project.project_title;
+		document.getElementById("gus-name").textContent = "Hi my name is " + project.gus_name + "!";
+		gus_level = project.level;
+		document.getElementById("gus-level").textContent = `Level: ${gus_level}`;
+
+		//.getElementById("gus-level").textContent = `Level: ${gus_level}`;
+
+		let gus_img_element = document.getElementById("character-img")
+		gus_img_element.src= level_gus_image[gus_level]
+
+	} catch (error) {
+		console.error("Error loading project:", error);
+	}
+}
 
 function addTaskFromObject(task_obj) {
 	const listContainer = document.getElementById("list-container");
@@ -28,7 +87,7 @@ function addTaskFromObject(task_obj) {
 }
 
 async function loadTasks() {
-	const res = await fetch(`http://127.0.0.1:5000/task/get_tasks_from_project_id?project_id=${1}`, {
+	const res = await fetch(`http://127.0.0.1:5000/task/get_tasks_from_project_id?project_id=${projectId}`, {
 		method: "GET",
 		credentials: "include",
 	});
@@ -48,10 +107,11 @@ async function addTask() {
 		return;
 	}
 
-	await addNewTaskToDatabase(task_name, 1); // TODO: replace 1 with actual project_id query param
+	await addNewTaskToDatabase(task_name, projectId);
 	const listContainer = document.getElementById("list-container");
 	listContainer.replaceChildren();
 	await loadTasks();
+	await loadProjectDetails();
 }
 
 async function addNewTaskToDatabase(task_name, project_id) {
@@ -79,7 +139,7 @@ async function addNewTaskToDatabase(task_name, project_id) {
 async function completeTask(event) {
 	const checkbox = event.target;
 	const taskId = checkbox.value;
-	console.log("task", taskId);
+
 	const res = await fetch(`http://127.0.0.1:5000/task/mark-task-completed`, {
 		method: "PUT",
 		credentials: "include",
@@ -88,13 +148,14 @@ async function completeTask(event) {
 		},
 		body: JSON.stringify({
 			task_id: taskId,
-            project_id: 1 // TODO: replace with real project_id
+            project_id: projectId
 		}),
 	});
 
 	if (res.ok) {
 		const result = await res.json();
 		console.log("Task completed:", result);
+		await loadProjectDetails();
 	} else {
 		console.error("Failed to complete task:", res.statusText);
 	}
