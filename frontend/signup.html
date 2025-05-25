@@ -21,14 +21,14 @@
 </head>
 <body>
     <div class="signup">
-        <form action="/signup" method="POST">
-            <h2>Create an Account</h2>
-            <input class="login-input" type="text" placeholder="Create a Username" name="username" required />
-            <input class="login-input" type="password" placeholder="Create a Password" name="password" required />
-            <button class="pink-btn" type="submit">Create Account</button>
-        
-            <button class="small-btn" type="button" onclick="location.href='login.html'">Back to Login</button>
+        <form id="signup-form">
+            <input type="text" id="signup-username" placeholder="Username" required />
+            <input type="password" id="signup-password" placeholder="Password" required />
+            <button type="submit">Sign Up</button>
         </form>
+        
+        <script src="signup.js"></script>
+        
       </div>
 </body>
 </html>
