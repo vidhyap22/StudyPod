@@ -116,15 +116,3 @@ def init_db():
     conn.commit()
     conn.close()
 
-if __name__ == "__main__":
-    # init_db()
-
-    # conn = sqlite3.connect("gus.db")
-    # cur = conn.cursor()
-
-    # cur.execute("""
-    # DELETE FROM Task WHERE task_id IN (14,12,11,10,9,8,7,6,5,4)
-    # """)
-
-    # conn.commit()
-    # conn.close()
