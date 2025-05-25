@@ -230,7 +230,7 @@ document.getElementById("add-pod-form").addEventListener("submit", async functio
 		
 	} catch (error) {
 		console.error("Error creating pod:", error);
-		alert("Something went wrong while creating the pod.");
+		// alert("Something went wrong while creating the pod.");
 	}
 });
 
