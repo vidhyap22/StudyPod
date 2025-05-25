@@ -193,10 +193,35 @@ function addPodCard(gusName, podName, level = 0) {
 
 	cardsGrid.appendChild(newCard);
 };
-document.getElementById("add-gus-button").addEventListener("click",function() {
-	const gusName = prompt("Name your Gus!");
-	const podName = prompt("Enter Pod Name");
-	addPodCard(gusName, podName);
-});
 
+function addTask(){
+	const inputBox = document.getElementById("input-box");
+	const listContainer = document.getElementById("list-container");
+
+	const task = inputBox.value.trim();
+	if(!task){
+		alert('Please write down a Task');
+		return;
+	}
+
+	const li = document.createElement("li");
+	li.innerHTML = `
+		<label>
+		<input type="checkbox">
+		<span>${task}</span>
+		</label>
+		`;
+
+	listContainer.appendChild(li);
+
+	inputBox.value = " ";
+
+	const checkbox = li.querySelector("input");
+
+	checkbox.addEventListener("click", function () {
+    li.classList.toggle("completed", checkbox.checked);
+    updateCounters();
+  	
+	});
+}
 
