@@ -427,14 +427,14 @@ li {
     margin: 10px auto;
 }
 
-input {
+.login-input {
     line-height: 30px;
     margin-bottom: 10px;
 	width: 25vh;
 	border-radius: 4px;
 }
 
-input.input-users {
+.login-input.input-users {
 	height: 10vh;
 }
 
