@@ -4,32 +4,44 @@ async function loadProjects() {
 		credentials: "include" // Send cookies for JWT
 	});
 
-	const grid = document.querySelector(".cards-grid");
+	const cardsGrid = document.querySelector(".cards-grid");
 
 	if (!res.ok) {
-		grid.innerHTML = "<p>Failed to load your Guses. Please try again.</p>";
+		cardsGrid.innerHTML = "<p>Failed to load your Guses. Please try again.</p>";
 		return;
 	}
 
 	const projects = await res.json();
 
 	if (projects.length === 0) {
-		grid.innerHTML = "<p>You have no active Guses. Create one to get started!</p>";
+		cardsGrid.innerHTML = "<p>You have no active Guses. Create one to get started!</p>";
 		return;
 	}
 
 	// Clear the grid and render each project as a card
-	grid.innerHTML = "";
+	cardsGrid.innerHTML = "";
 	projects.forEach(project => {
-		const card = document.createElement("div");
-		card.className = "main-card grow-on-hover";
-		card.innerHTML = `
-			<h3>${project.project_title}</h3>
-			<p><strong>Gus Name:</strong> ${project.gus_name}</p>
-			<p><strong>Level:</strong> ${project.level}</p>
-			<p><strong>Deadline:</strong> ${project.deadline ? project.deadline.split("T")[0] : "None"}</p>
+		const newCard = document.createElement("div");
+		newCard.classList.add("card-wrapper", "grow-on-hover");
+		//newCard.className = "main-card grow-on-hover";
+		
+		const rawDate = project.deadline;
+		const formattedDate = rawDate ? new Date(rawDate).toLocaleDateString('en-US', {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric'
+		}) : "None";
+
+		newCard.innerHTML = `
+			<h1 class="card-level">${project.level}</h1>
+			<div class="card-inner">
+				<img class="base-gus" src="images/base-gus.png" alt="Base Gus">
+				<h3 class="gus-name">${project.gus_name}</h3>
+				<h3 class="pod-name">${project.project_title}</h3>
+				<h3 class="deadline">Due: ${formattedDate}</h3>
+			</div>
 		`;
-		grid.appendChild(card);
+		cardsGrid.appendChild(newCard);
 	});
 }
 

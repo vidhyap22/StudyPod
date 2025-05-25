@@ -95,14 +95,19 @@ a {
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .cards-grid {
-	display: grid;
+	/* display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	gap: 25px;
-	margin: 25px 0;
+	margin: 25px 0; */
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 25px;
+	margin: 25px 0 10px 0;
+	width: 100%;
 }
 
 .card-wrapper {
-	padding: 10px 20px;
+	/* padding: 10px 20px;
 	border-radius: 3%;
 	display: flex;
 	flex-direction: column;
@@ -113,10 +118,19 @@ a {
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	overflow: hidden;
-	white-space: normal;
+	white-space: normal; */
+
+	background-color: #f4e8ff95; 
+	width: 220px;
+	height: auto; 
+  	box-sizing: border-box;
+	padding: 10px 20px 20px 20px;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 }
 
-/* .cards-grid .card-wrapper:nth-child(5n) {
+.cards-grid .card-wrapper:nth-child(5n) {
 	background-color: #fff4de95;
 }
 
@@ -130,14 +144,15 @@ a {
 
 .cards-grid .card-wrapper:nth-child(5n + 4) {
 	background-color: #bce6fb4a;
-} */
+}
 
 .card-inner {
 	justify-content: space-between;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	height: 200px;
+	height: auto;
+	text-align: center;
 }
 
 .card-inner .gus-img {
@@ -149,22 +164,29 @@ a {
 
 .gus-name {
 	font-weight: 800;
-	font-size: 1rem;
+	font-size: 1.2rem;
 	text-transform: uppercase;
-	margin-bottom: 0.8rem;
+	margin-bottom: 0.5rem;
 }
 
 .pod-name {
 	font-weight: 600;
-	font-size: 0.85rem;
+	font-size: 0.9rem;
 	text-transform: uppercase;
 	white-space: normal;
-	margin-bottom: 1rem;
+	margin-bottom: 0.25rem;
+}
+
+.deadline {
+	font-weight: 600;
+	font-size: 0.9rem;
+	text-transform: uppercase;
+	margin-bottom: 0.25rem;
 }
 
 .card-level {
 	font-weight: 650;
-	font-size: 2rem;
+	font-size: 1.5rem;
 	color: #675150;
 	padding: 0px;
 }

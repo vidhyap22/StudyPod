@@ -182,6 +182,14 @@ function addPodCard(gusName, podName, deadline, level = 0) {
 	const cardsGrid = document.querySelector(".cards-grid");
 	const newCard = document.createElement("div");
 	newCard.classList.add("card-wrapper", "grow-on-hover");
+	//newCard.className = "main-card grow-on-hover";
+
+	const rawDate = deadline;
+	const formattedDate = rawDate ? new Date(rawDate).toLocaleDateString('en-US', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric'
+	}) : "None";
 
 	newCard.innerHTML = `
 		<h1 class="card-level">${level}</h1>
@@ -189,7 +197,7 @@ function addPodCard(gusName, podName, deadline, level = 0) {
 			<img class="base-gus" src="images/base-gus.png" alt="Base Gus">
 			<h3 class="gus-name">${gusName}</h3>
 			<h3 class="pod-name">${podName}</h3>
-			<h3 class="deadline">${deadline}</h3>
+			<h3 class="deadline">Due: ${formattedDate}</h3>
 		</div>
 	`;
 
