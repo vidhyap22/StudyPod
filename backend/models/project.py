@@ -1,8 +1,49 @@
 import sqlite3
 from flask import Flask, request, jsonify, Blueprint, make_response
 from models.user import token_required 
+from datetime import datetime
 
 project_routes = Blueprint("project_routes", __name__)
+
+@project_routes.route('/create-project', methods=['POST'])
+@token_required
+def create_project(current_user):
+    my_user_id = current_user[0]
+    data = request.json
+    usernames = data.get("usernames", [])
+    print("debug, usernames of teammates: ", usernames)
+    try:
+        conn = sqlite3.connect("gus.db")
+        cur = conn.cursor()
+
+        user_ids = [my_user_id]
+        for username in usernames:
+            cur.execute("SELECT user_id FROM User WHERE username = ?", (username,))
+            row = cur.fetchone()
+            if row:
+                user_ids.append(row[0])
+            else:
+                return jsonify(msg=f"User '{username}' not found."), 404
+
+        # insert into project table
+        cur.execute("""INSERT INTO Project (project_title, gus_name, level, deadline, is_active, created_time) 
+                    VALUES (?, ?, ?, ?, ?, ?)""", 
+                    (data["project_title"], data["gus_name"], data["level"], data["deadline"], data["is_active"], datetime.now()))
+        project_id = cur.lastrowid
+
+        # associate users with the project
+        user_project_pairs = [(uid, project_id) for uid in user_ids]
+        cur.executemany("INSERT INTO User_Project (user_id, project_id) VALUES (?, ?)", user_project_pairs)
+        conn.commit()
+
+        return jsonify({
+            "msg":"Created project!",
+            "project_id":project_id}
+            ), 201
+    except sqlite3.IntegrityError as e:
+        return jsonify(msg=f"Error creating project: {str(e)}"), 500
+    finally:
+        conn.close()
 
 
 @project_routes.route('/get-all-projects', methods=['GET'])
@@ -39,7 +80,7 @@ def get_project(current_user): # current user is the entire tuple
     """This returns one project given the project id. Does not use user id."""
     # print("current user: ", current_user)
     project_id = request.args.get("project_id")
-
+    print("debug project_id: ", project_id)
     if not project_id:
         return jsonify({"message": "Missing project_id"}), 400
     
@@ -48,7 +89,7 @@ def get_project(current_user): # current user is the entire tuple
     cur = conn.cursor()
 
     cur.execute("""
-        SELECT * FROM Project WHERE project_id = ? """, (project_id))
+        SELECT * FROM Project WHERE project_id = ? """, (project_id,))
     
     row = cur.fetchone()
     conn.close()
