@@ -93,3 +93,30 @@ def get_tasks_from_pair(current_user):
     conn.close()
 
     return jsonify(tasks), 200
+
+
+@task_routes.route('/get_tasks_from_project_id', methods=['GET'])
+@token_required
+def get_tasks_from_project_id(current_user):
+    """Returns all tasks associated with a specific user within a project."""
+    """This would run for each user that's working on the project."""
+    user_id = current_user[0]
+    project_id = request.args.get('project_id')
+
+    if not user_id or not project_id:
+        return jsonify({'error': 'Missing user_id or project_id'}), 400
+
+    conn = sqlite3.connect("gus.db")
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+
+    cur.execute("""
+        SELECT task_id, task_name, is_completed
+        FROM Task
+        WHERE user_id = ? AND project_id = ?
+    """, (user_id, project_id))
+
+    tasks = [dict(row) for row in cur.fetchall()]
+    conn.close()
+
+    return jsonify(tasks), 200
