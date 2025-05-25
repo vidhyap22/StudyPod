@@ -18,7 +18,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
         const data = await res.json();
         if (res.ok) {
             alert("Login successful!");
-            window.location.href = "/dashboard.html"; // or your actual page
+            window.location.href = "http://127.0.0.1:5500/frontend/index.html";
         } else {
             alert(data.message || "Login failed.");
         }
