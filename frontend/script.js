@@ -59,7 +59,7 @@ const barChartOptions = {
 		theme: "dark",
 	},
 	xaxis: {
-		categories: ["Agathario Gus", "Glee Gus", "Yaoi Podcast Gus"],
+		categories: ["161 Midterm", "ICS 53 Project", "Podcast Project"],
 		title: {
 			style: {
 				color: "#000",
