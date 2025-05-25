@@ -165,16 +165,17 @@ document.getElementById("add-pod-form").addEventListener("submit", function(e) {
 	e.preventDefault();
 	const gusName = document.getElementById("gusname").value;
 	const podName = document.getElementById("podname").value;
+	const deadline = document.getElementById("deadline").value;
 	const users = document.getElementById("users").value.split(",").map(u => u.trim());
 
 
-	addPodCard(gusName, podName);
+	addPodCard(gusName, podName, deadline);
 
 	this.reset();
 	closeForm();
 });
 
-function addPodCard(gusName, podName, level = 0) {
+function addPodCard(gusName, podName, deadline, level = 0) {
 	gusName = gusName || "My Gus";
 	podName = podName || "My Study Pod";
 
@@ -188,6 +189,7 @@ function addPodCard(gusName, podName, level = 0) {
 			<img class="base-gus" src="https://i.imgur.com/z6kgobh.png" alt="Base Gus">
 			<h3 class="gus-name">${gusName}</h3>
 			<h3 class="pod-name">${podName}</h3>
+			<h3 class="deadline">${deadline}</h3>
 		</div>
 	`;
 
