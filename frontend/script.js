@@ -167,10 +167,7 @@ document.getElementById("add-pod-form").addEventListener("submit", function (e) 
 	const deadline = document.getElementById("deadline").value;
 	const users = document.getElementById("users").value.split(",").map(u => u.trim());
 
-	const users = document
-		.getElementById("users")
-		.value.split(",")
-		.map((u) => u.trim());
+
 
 	addPodCard(gusName, podName, deadline);
 

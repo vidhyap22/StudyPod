@@ -48,7 +48,7 @@ def token_required(f):
 def authenticate_user(un, plain_pwd):
     conn = sqlite3.connect("gus.db")
     cur = conn.cursor()
-    cur.execute(f"SELECT * FROM User WHERE username = '{un}'")
+    cur.execute("SELECT * FROM User WHERE username = ?", (un,))
     user = cur.fetchone()
 
     print(user)
@@ -63,7 +63,9 @@ def authenticate_user(un, plain_pwd):
 
     # response = make_response(redirect(url_for('dashboard')))
     response = make_response(jsonify({"message": "Login succesful!"}))
-    response.set_cookie('jwt_token', token)
+    # response.set_cookie('jwt_token', token)
+    response.set_cookie('jwt_token', token, httponly=True, samesite='Lax', path='/')
+
 
     return response
 
@@ -90,6 +92,7 @@ def register():
 
 @auth_routes.route('/login', methods=['POST'])
 def login():
+    print("debug: login attempted")
     data = request.json
     username = data["username"]
     password = data["password"]
