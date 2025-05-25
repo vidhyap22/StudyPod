@@ -1,9 +1,9 @@
 body {
 	padding: 0;
 	margin: 0;
-	font-family: 'Open Sans', sans-serif;
+	font-family: "Open Sans", sans-serif;
 	background: #fefdf9;
-	background: linear-gradient(0deg,rgba(255, 203, 203, 1) 29%, rgba(255, 230, 173, 1) 100%);
+	background: linear-gradient(0deg, rgba(255, 203, 203, 1) 29%, rgba(255, 230, 173, 1) 100%);
 }
 
 a {
@@ -55,7 +55,7 @@ a {
 .logo-img {
 	height: 200px;
 	aspect-ratio: 1;
-	background-image: url('https://i.imgur.com/ETfCiNu.png');
+	background-image: url("images/studypod-logo.png");
 	border-radius: 10%;
 	background-size: contain;
 	background-repeat: no-repeat;
@@ -111,7 +111,7 @@ a {
 	background-color: #f4e8ff95;
 	max-width: 250px;
 	word-wrap: break-word;
-  	overflow-wrap: break-word;
+	overflow-wrap: break-word;
 	overflow: hidden;
 	white-space: normal;
 }
@@ -148,7 +148,7 @@ a {
 }
 
 .gus-name {
-	font-weight:800;
+	font-weight: 800;
 	font-size: 1rem;
 	text-transform: uppercase;
 	margin-bottom: 0.8rem;
@@ -203,14 +203,14 @@ a {
 #add-gus-button {
 	font-size: 14px;
 	padding: 6px 12px;
-	background-color: #FFB5B5;
-	border-color: #FFCBCB;
+	background-color: #ffb5b5;
+	border-color: #ffcbcb;
 	border-radius: 6px;
 }
 
 .form-popup-overlay {
 	display: none;
-	position:fixed;
+	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -228,16 +228,16 @@ a {
 .form-container {
 	width: 35vh;
 	height: 50vh;
-    border: 1px solid #ccc;
-    padding: 20px;
-    box-shadow: 0 0 10px #ccc;
-    border-radius: 8px;
-    background: #f9f9f9;
+	border: 1px solid #ccc;
+	padding: 20px;
+	box-shadow: 0 0 10px #ccc;
+	border-radius: 8px;
+	background: #f9f9f9;
 	display: flex;
-    flex-direction: column;
+	flex-direction: column;
 	justify-content: center;
-    align-items: center;
-    gap: 1rem;
+	align-items: center;
+	gap: 1rem;
 }
 
 .create-pod-field {
@@ -250,7 +250,6 @@ a {
 	align-items: center;
 	margin-bottom: 15px; /* add some spacing below the header */
 }
-
 
 .close-form {
 	position: absolute;
@@ -280,8 +279,8 @@ a {
 #add-task-button {
 	font-size: 14px;
 	padding: 6px 12px;
-	background-color: #FFB5B5;
-	border-color: #FFCBCB;
+	background-color: #ffb5b5;
+	border-color: #ffcbcb;
 	border-radius: 6px;
 }
 .base-gus {
@@ -289,50 +288,49 @@ a {
 	height: 15vh;
 }
 
-
 /* Login and Sign Up Pages */
 
-.login, .signup {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+.login,
+.signup {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
 }
 
 form {
 	width: 35vh;
 	height: 50vh;
-    border: 1px solid #ccc;
-    padding: 20px;
-    box-shadow: 0 0 10px #ccc;
-    border-radius: 8px;
-    background: #f9f9f9;
+	border: 1px solid #ccc;
+	padding: 20px;
+	box-shadow: 0 0 10px #ccc;
+	border-radius: 8px;
+	background: #f9f9f9;
 	display: flex;
-    flex-direction: column;
+	flex-direction: column;
 	justify-content: center;
-    align-items: center;
-    gap: 1rem;
+	align-items: center;
+	gap: 1rem;
 }
 
 .pink-btn {
-    padding: 8px 10px;
-    display: block;
-    margin: 0 auto;
+	padding: 8px 10px;
+	display: block;
+	margin: 0 auto;
 
 	font-size: 14px;
 	color: #675150;
 	padding: 6px 12px;
-	background-color: #FFCBCB;
-	border-color: #FFCBCB;
+	background-color: #ffcbcb;
+	border-color: #ffcbcb;
 	border-radius: 6px;
 }
 
 ul {
-  list-style: none;
-  padding: 0;
-  margin-top: 20px;
-  text-align:left;
-
+	list-style: none;
+	padding: 0;
+	margin-top: 20px;
+	text-align: left;
 }
 
 li {
@@ -341,15 +339,15 @@ li {
 }
 
 #input-box {
-  width: 200px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-right: 5px;
-  font-size: 20px;
+	width: 200px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	margin-right: 5px;
+	font-size: 20px;
 }
 
-.todo-character-wrapper{
+.todo-character-wrapper {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 25px;
@@ -364,58 +362,58 @@ li {
 }
 
 .character-img {
-  width: 350px;
-  height: 350px;
-  border-radius: 75%;
-  margin-right: 15px;
-  object-fit: cover;
+	width: 350px;
+	height: 350px;
+	border-radius: 75%;
+	margin-right: 15px;
+	object-fit: cover;
 }
 
 .character-box.vertical {
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
 }
 
 .progress-bar {
-  width: 100%;
-  height: 12px;
-  background: #ddd;
-  border-radius: 6px;
-  overflow: hidden;
-  margin-top: 8px;
+	width: 100%;
+	height: 12px;
+	background: #ddd;
+	border-radius: 6px;
+	overflow: hidden;
+	margin-top: 8px;
 }
 
 .progress-fill {
-  height: 100%;
-  background: #78c9fe;
-  width: 50%; /* Update dynamically with JS */
-  transition: width 0.3s ease;
+	height: 100%;
+	background: #78c9fe;
+	width: 50%; /* Update dynamically with JS */
+	transition: width 0.3s ease;
 }
 
 .character-name {
-	color: #dd7e91
+	color: #dd7e91;
 }
 .pink-btn:hover {
-    padding: 8px 10px;
-    display: block;
-    margin: 0 auto;
+	padding: 8px 10px;
+	display: block;
+	margin: 0 auto;
 
 	font-size: 14px;
 	color: #675150;
 	padding: 6px 12px;
-	background-color: #FFB5B5;
-	border-color: #FFB5B5;
+	background-color: #ffb5b5;
+	border-color: #ffb5b5;
 	border-radius: 6px;
 }
 
 .small-btn {
 	border: none;
 	background: none;
-	color: #FFB5B5;
+	color: #ffb5b5;
 	padding: 0.5px 0.5px;
 	display: block;
-    margin: 10px auto;
+	margin: 10px auto;
 }
 
 .small-btn:hover {
@@ -424,12 +422,12 @@ li {
 	color: #675150;
 	padding: 1px 1px;
 	display: block;
-    margin: 10px auto;
+	margin: 10px auto;
 }
 
 .login-input {
-    line-height: 30px;
-    margin-bottom: 10px;
+	line-height: 30px;
+	margin-bottom: 10px;
 	width: 25vh;
 	border-radius: 4px;
 }
@@ -437,8 +435,6 @@ li {
 .login-input.input-users {
 	height: 10vh;
 }
-
-
 
 /* 
 ---- LATER ----
