@@ -151,7 +151,7 @@ a {
 	font-weight:800;
 	font-size: 1rem;
 	text-transform: uppercase;
-	margin-bottom: 1rem;
+	margin-bottom: 0.8rem;
 }
 
 .pod-name {
@@ -164,7 +164,9 @@ a {
 
 .card-level {
 	font-weight: 650;
+	font-size: 2rem;
 	color: #675150;
+	padding: 0px;
 }
 
 .charts-content {
@@ -266,6 +268,11 @@ a {
 
 .grow-on-hover:hover {
 	transform: scale(1.015);
+}
+
+.base-gus {
+	width: 15vh;
+	height: 15vh;
 }
 
 

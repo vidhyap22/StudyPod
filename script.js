@@ -185,7 +185,7 @@ function addPodCard(gusName, podName, level = 0) {
 	newCard.innerHTML = `
 		<h1 class="card-level">${level}</h1>
 		<div class="card-inner">
-			<div class="gus-img"></div>
+			<img class="base-gus" src="https://i.imgur.com/z6kgobh.png" alt="Base Gus">
 			<h3 class="gus-name">${gusName}</h3>
 			<h3 class="pod-name">${podName}</h3>
 		</div>
