@@ -59,7 +59,7 @@ def authenticate_user(un, plain_pwd):
     if not user or not check_password(plain_pwd, user[2]):
         return jsonify({'message': 'Invalid username or password'}), 401
     
-    token = jwt.encode({'user_id': user[0], 'exp': datetime.now(timezone.utc) + timedelta(hours=1)}, os.getenv("SECRET_KEY"), algorithm="HS256")
+    token = jwt.encode({'user_id': user[0], 'exp': datetime.now(timezone.utc) + timedelta(hours=10)}, os.getenv("SECRET_KEY"), algorithm="HS256")
 
     # response = make_response(redirect(url_for('dashboard')))
     response = make_response(jsonify({"message": "Login succesful!"}))
@@ -117,4 +117,14 @@ def init_db():
     conn.close()
 
 if __name__ == "__main__":
-    init_db()
+    # init_db()
+
+    # conn = sqlite3.connect("gus.db")
+    # cur = conn.cursor()
+
+    # cur.execute("""
+    # DELETE FROM Task WHERE task_id IN (14,12,11,10,9,8,7,6,5,4)
+    # """)
+
+    # conn.commit()
+    # conn.close()

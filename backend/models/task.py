@@ -1,7 +1,7 @@
 import sqlite3
 from flask import Flask, request, jsonify, Blueprint, make_response
 from models.user import token_required 
-
+from models.project import update_gus_level
 task_routes = Blueprint("task_routes", __name__)
 
 def create_project_table():
@@ -27,7 +27,7 @@ def create_project_table():
 @task_routes.route('/create-task', methods=['POST'])
 @token_required
 def create_task(current_user):
-
+    user_id = current_user[0]
     data = request.json
 
     try:
@@ -36,7 +36,7 @@ def create_task(current_user):
 
         cur.execute("""INSERT INTO Task (task_name, user_id, project_id, is_completed) 
                     VALUES (?, ?, ?, ?)""", 
-                    (data["task_name"], data["user_id"], data["project_id"], data["is_completed"]))
+                    (data["task_name"],user_id, data["project_id"], data["is_completed"]))
         conn.commit()
 
         return jsonify(msg="Created task!"), 201
@@ -45,27 +45,6 @@ def create_task(current_user):
     finally:
         conn.close()
 
-
-@task_routes.route('/mark-task-completed', methods=['PUT'])
-@token_required
-def mark_task_completed(current_user):
-
-    data = request.json
-
-    try:
-        conn = sqlite3.connect("gus.db")
-        cur = conn.cursor()
-
-        cur.execute(f"""UPDATE Task
-                        SET is_completed = True
-                        WHERE task_id = {data["task_id"]};""")
-        conn.commit()
-
-        return jsonify(msg="Mark task completed!"), 201
-    except sqlite3.IntegrityError as e:
-        return jsonify(msg=f"Error completing task: {str(e)}"), 500
-    finally:
-        conn.close()
 
 
 @task_routes.route('/get-tasks-from-pair', methods=['GET'])
@@ -144,3 +123,53 @@ def get_total_tasks_completed(current_user):
     conn.close()
 
     return jsonify({"count": count}), 200
+
+
+@task_routes.route('/mark-task-completed', methods=['PUT'])
+@token_required
+def mark_task_completed(current_user):
+
+    data = request.json
+
+    try:
+        conn = sqlite3.connect("gus.db")
+        cur = conn.cursor()
+
+        cur.execute(f"""UPDATE Task
+                        SET is_completed = True
+                        WHERE task_id = {data["task_id"]};""")
+        conn.commit()
+        curr_total = get_total_tasks_completed_count(data["project_id"])
+        
+        curr_level = curr_total // 3
+        print("total", curr_total)
+        print(f"new level {curr_level}")
+        cur.execute(f"""UPDATE Project
+                        SET level = {curr_level}
+                        WHERE project_id = {data["project_id"]};""")
+        conn.commit()
+        return jsonify(msg=f"Mark task completed!"), 201
+        
+    except sqlite3.IntegrityError as e:
+        return jsonify(msg=f"Error completing task: {str(e)}"), 500
+    finally:
+        conn.close()
+
+
+
+def get_total_tasks_completed_count(project_id):
+    """Returns all tasks completed by all users associated with a specific project."""
+    """This would run for each user that's working on the project."""
+    conn = sqlite3.connect("gus.db")
+    cur = conn.cursor()
+
+    cur.execute("""
+        SELECT COUNT(*)
+        FROM Task
+        WHERE project_id = ? AND is_completed = 1
+    """, (project_id,))
+
+    count = cur.fetchone()[0]
+    conn.close()
+
+    return count
