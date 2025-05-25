@@ -20,25 +20,15 @@
     </style>
 </head>
 <body>
-
-    <div class="login">
-        <img src="https://i.imgur.com/DWvwWjD.png" alt="StudyPod Logo">
-    </div>
-
-    <!-- <div class="arrow bounce"></div> -->
-
-    <div class="login">
-        <form action="/login" method="POST">
-            <img src="https://i.imgur.com/z6kgobh.png" alt="StudyPod Logo" width="200vh">
-            <input type="text" id="username" placeholder="Username" required/>
-            <input type="password" id="password" placeholder="Password" required/>
-            <button class="pink-btn" type="submit">Log In</button>
-            
-            <button class="small-btn" type="button" onclick="location.href='signup.html'">Sign Up</button>
-
+    <div class="signup">
+        <form action="/signup" method="POST">
+            <h2>Create an Account</h2>
+            <input type="text" placeholder="Create a Username" name="username" required />
+            <input type="password" placeholder="Create a Password" name="password" required />
+            <button class="pink-btn" type="submit">Create Account</button>
+        
+            <button class="small-btn" type="button" onclick="location.href='login.html'">Back to Login</button>
         </form>
-    </div>
-
-
+      </div>
 </body>
 </html>
