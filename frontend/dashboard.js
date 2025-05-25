@@ -33,7 +33,11 @@ async function loadProjects() {
 		}) : "None";
 
 		newCard.innerHTML = `
-			<h1 class="card-level">Level: ${project.level}</h1>
+			<div class="card-header">
+				<h1 class="card-level">Level: ${project.level}</h1>
+				<h3 class="tasks-completed">Loading...</h3>
+			</div>
+
 			<div class="card-inner">
 				<img class="base-gus" src="images/base-gus.png" alt="Base Gus">
 				<h3 class="gus-name">${project.gus_name}</h3>
@@ -52,6 +56,28 @@ async function loadProjects() {
 
 		cardsGrid.appendChild(newCard);
 	});
+
+	loadCompletedTaskCounts();
 }
 
+async function loadCompletedTaskCounts() {
+	const cards = document.querySelectorAll(".card-wrapper");
+	for (const card of cards) {
+		const projectId = card.dataset.projectId;
+		const countEl = card.querySelector(".tasks-completed");
+		try {
+			const res = await fetch(`http://127.0.0.1:5000/task/get_total_tasks_completed?project_id=${projectId}`, {
+				credentials: "include"
+			});
+			const data = await res.json();
+			const {completed, total} = data;
+			countEl.textContent = `${completed}/${total} tasks completed`;
+		} catch (e) {
+			console.error("Error loading tasks for project:", projectId, e);
+			countEl.textContent = "Error loading tasks";
+		}
+	}
+ }
+
+ 
 window.addEventListener("DOMContentLoaded", loadProjects);

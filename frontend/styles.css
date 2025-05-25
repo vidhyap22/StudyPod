@@ -187,12 +187,13 @@ a {
 	margin-bottom: 0.25rem;
 }
 
-.deadline {
+.deadline, .tasks-completed {
 	font-weight: 600;
 	font-size: 0.9rem;
 	text-transform: uppercase;
 	margin-bottom: 0.25rem;
 }
+
 
 .card-level {
 	font-weight: 650;
